@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/TauanMatos/bot-video-maker.git",
   "author": "Tauan Matos <144151034@unifacs.edu.br>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
 }
