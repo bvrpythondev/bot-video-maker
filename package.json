@@ -10,6 +10,6 @@
     "readline-sync": "^1.4.9"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/orquestrator/index.js"
   }
 }
