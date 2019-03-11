@@ -7,6 +7,7 @@
   "author": "Tauan Matos <144151034@unifacs.edu.br>",
   "license": "MIT",
   "dependencies": {
+    "algorithmia": "^0.3.10",
     "readline-sync": "^1.4.9"
   },
   "scripts": {
