@@ -3,7 +3,7 @@ const apiKey = require('../credentials/algorithmiaSettings.json').apiKey
 async function robot(content) {
   console.log(`Recebi com sucesso o content: ${content.searchTerm}`);
   await fetchContentFromWikipedia(content);
-  //sanitizeContent(content)
+  sanitizeContent(content)
   //breakContentIntoSentences(content)
 
   async function fetchContentFromWikipedia(content){
@@ -12,7 +12,23 @@ async function robot(content) {
     const wikipediaResponse = await wikipediaAlgorithmia.pipe(content.searchTerm)
     const wikipediaContent = wikipediaResponse.get()
 
-    console.log(wikipediaContent);
+    content.sourceContentOriginal = wikipediaContent.content
+  }
+
+  function sanitizeContent(content){
+    const contentWithoutBlankLinesAndMarkdownAndDates = removeBlankLinesAndMarkdownAndDates(content.sourceContentOriginal)
+
+    content.sourceContentSanitized = contentWithoutBlankLinesAndMarkdownAndDates
+    console.log(content)
+
+    function removeBlankLinesAndMarkdownAndDates(text){
+      var sanitizedText = text.split('\n')
+
+      sanitizedText = sanitizedText.filter((line) => !(line.trim().length === 0 || line.trim().startsWith('='))).join(' ')//remoção linhas vazias e que possuam o markdown do wikipedia
+      sanitizedText = sanitizedText.replace(/\((?:\([^()]*\)|[^()])*\)/gm, '').replace(/  /g,' ') // remoção de conteúdo entre parentesis (datas)
+
+      return sanitizedText
+    }
   }
 }
 
