@@ -8,5 +8,6 @@ async function start() {
   robots.userInput(content)
   await robots.text(content)
 
+  console.log(content)
 }
 start()
